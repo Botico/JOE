@@ -1,6 +1,14 @@
 # JOE
 Joe is a home assistant written in Java.
 
+# Dependencies
+
+    • Maven
+    
+    • Bash/Shell
+    
+    • Java
+
 # Install:
 To install JOE, please make sure you have bash. MacOSX and Debain/Ubuntu/Fedora/RedHat should already have bash. To do this run:
 ```
@@ -37,4 +45,6 @@ make
 sudo make install
 ```
 
-After installing bash (if needed), go ahead and run the JOE installer script.
+After installing bash (if needed), go ahead and run the JOE installer script by running:
+```
+./installer.sh
