@@ -2,19 +2,49 @@ import java.util.Scanner;
 import java.util.regex.*;
 import java.util.Calendar;
 import java.io.*;
-import java.net.URL;
-import javax.sound.sampled.*;
-import javax.swing.*;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.BufferedReader;
 
 public class Core extends Thread implements Runnable{
 
-    private static String user_input() {
+    private static String userInput() {
         // This is the user input method that gets user input
         Scanner input = new Scanner(System.in);
         return input.nextLine().toLowerCase();
     }
 
-    private static void time(String type) {
+    private static void chat() throws IOException, ParseException {
+        // This is the chat method
+        String[] arguments = new String[] {"123"};
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader("./data/UpdatedData.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        System.out.println("Ok, what do you want to talk about?");
+        String secondaryInput = userInput();
+        if (Pattern.matches(".*\\bday\\b.*", secondaryInput)) {
+            System.out.println("My day is " + (String) jsonObject.get("dayQuality") + ". Hows yours?");
+            String tridaryInput = userInput();
+            if (Pattern.matches("(.*\bhorrible\b.*|.*\bbad\b.*)", tridaryInput)){
+                System.out.println("Sorry to hear that.");
+                main(arguments);
+            } else if (Pattern.matches("(.*\\bokay\\b.*|.*\\bfine\\b.*)", tridaryInput)) {
+                System.out.println("Wells that's good!");
+                main(arguments);
+            } else if (Pattern.matches("(.*\\bgreat\\b.*|.*\\bbest\\b.*)", tridaryInput)) {
+                System.out.println("Good for you!");
+                main(arguments);
+            }
+        } else {
+            System.out.println("Did you grow up under a rock? Because I cant understand that.");
+            main(arguments);
+        }
+    }
+
+    private static void time(String type) throws IOException, ParseException {
         // This method handles time
         String[] arguments = new String[] {"123"};
         Calendar cal = Calendar.getInstance();
@@ -42,73 +72,42 @@ public class Core extends Thread implements Runnable{
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ParseException {
         // This is the main method that handles calling functions based on user input
         String[] arguments = new String[] {"123"};
+
+        BufferedReader reader = new BufferedReader(new FileReader("./data/log.txt"));
+        int lines = 0;
+        while (reader.readLine() != null) lines++;
+             reader.close();
+
+        if (lines >= 50000) {
+            PrintWriter writer = new PrintWriter("./data/log.txt");
+            writer.print("");
+            writer.close();
+        }
+        Process myProcess = Runtime.getRuntime().exec("java -cp ./target/classes/UpdateData.class");
         System.out.println("Hello! I'm Joe. Can I help you today?");
-        String input = user_input();
-        if (Pattern.matches(".*\\btime\\b.*", input)) {
-            time("time");
-        }
-        else if (Pattern.matches(".*\\bminute\\b.*", input)) {
-            time("minute");
-        }
-        else if (Pattern.matches(".*\\bhour\\b.*", input)) {
-            time("hour");
-        }
-        else if (Pattern.matches(".*\\bmonth\\b.*", input)) {
-            time("month");
-        }
-        else if (Pattern.matches(".*\\byear\\b.*", input)) {
-            time("year");
-        } else if (Pattern.matches("(.*\\bsound\\b.*)|(.*\\bmusic\\b.*)|(.*\\baudible\\b.*)|(.*\\bplay\\b.*)", input)) {
-
-            if (Pattern.matches("(.*\\bhappy\\b.*)|(.*\\benthusiastic\\b.*)|(.*\\bcheerful\\b.*)|(.*\\bestatic\\b.*)|(.*\\bjubilant\\b.*)|(.*\\bjoyfull\\b.*)|(.*\\bupbeat\\b.*)", input)) {
-
-            } else if (Pattern.matches("(.*\\bsad\\b.*)|(.*\\bmeloncholly\\b.*)|(.*\\bdepresing\\b.*)|(.*\\bdismal\\b.*)|(.*\\bwistfull\\b.*)|(.*\\bbitter\\b.*)|(.*\\bsomber\\b.*)", input)) {
-
-            } else if (Pattern.matches("(.*\\bscarry\\b.*)|(.*\\bcreepy\\b.*)|(.*\\berrie\\b.*)|(.*\\bhorifying\\b.*)|(.*\\bspooky\\b.*)|(.*\\bchilling\\b.*)", input)) {
-
-            } else if (Pattern.matches("(.*\\belectronic\\b.*)|(.*\\bcomputerized\\b.*)", input)) {
-
-            } else if (Pattern.matches("(.*\\bmeditation\\b.*)|(.*\\bcalming\\b.*)", input)) {
-
+        String startingInput = userInput();
+        if (Pattern.matches(".*\\bjoe\\b.*", startingInput)) {
+            System.out.println("How can I help you?");
+            String input = userInput();
+            if (Pattern.matches(".*\\btime\\b.*", input)) {
+                time("time");
+            } else if (Pattern.matches(".*\\bminute\\b.*", input)) {
+                time("minute");
+            } else if (Pattern.matches(".*\\bhour\\b.*", input)) {
+                time("hour");
+            } else if (Pattern.matches(".*\\bmonth\\b.*", input)) {
+                time("month");
+            } else if (Pattern.matches(".*\\byear\\b.*", input)) {
+                time("year");
+            } else if (Pattern.matches(".*\\bchat\\b.*",input)) {
+                chat();
             } else {
-                System.out.println("Sorry, but I can't find that music file. Try running diagnostics!");
+                System.out.println("I'm sorry, but I don't quite understand. Later, you will be able to install mods with want you want.");
+                main(arguments);
             }
-
-        } else {
-            System.out.println("Sorry, I don't quite understand. Later, you will be able to install mods with want you want.");
-            main(arguments);
-        }
-    }
-}
-
-class Audio extends JFrame {
-    public Audio(String type, String fileName) {
-        switch (type) {
-            case "time":
-                sound(fileName);
-        }
-    }
-    public void sound(String fileName) {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Test Sound Clip");
-        this.setSize(300, 200);
-        this.setVisible(true);
-
-        try {
-            // Open an audio input stream.
-            URL url = this.getClass().getClassLoader().getResource(fileName);
-            assert url != null;
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-            // Get a sound clip resource.
-            Clip clip = AudioSystem.getClip();
-            // Open audio clip and load samples from the audio input stream.
-            clip.open(audioIn);
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
         }
     }
 }
