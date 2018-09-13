@@ -1,4 +1,6 @@
 # JOE
+
+# About
 Joe is a home assistant written in Java.
 
 # Dependencies
