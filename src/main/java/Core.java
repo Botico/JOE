@@ -26,7 +26,7 @@ public class Core extends Thread implements Runnable{
         System.out.println("Ok, what do you want to talk about?");
         String secondaryInput = userInput();
         if (Pattern.matches(".*\\bday\\b.*", secondaryInput)) {
-            System.out.println("My day is " + (String) jsonObject.get("dayQuality") + ". Hows yours?");
+            System.out.println("My day is " + jsonObject.get("dayQuality") + ". Hows yours?");
             String tridaryInput = userInput();
             if (Pattern.matches("(.*\bhorrible\b.*|.*\bbad\b.*)", tridaryInput)){
                 System.out.println("Sorry to hear that.");
@@ -86,7 +86,6 @@ public class Core extends Thread implements Runnable{
             writer.print("");
             writer.close();
         }
-        Process myProcess = Runtime.getRuntime().exec("java -cp ./target/classes/UpdateData.class");
         System.out.println("Hello! I'm Joe. Can I help you today?");
         String startingInput = userInput();
         if (Pattern.matches(".*\\bjoe\\b.*", startingInput)) {
