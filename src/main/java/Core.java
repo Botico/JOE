@@ -1,13 +1,14 @@
-import java.util.Scanner;
-import java.util.regex.*;
-import java.util.Calendar;
-import java.io.*;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Core extends Thread implements Runnable{
 
@@ -75,6 +76,9 @@ public class Core extends Thread implements Runnable{
     public static void main(String[] args) throws IOException, ParseException {
         // This is the main method that handles calling functions based on user input
         String[] arguments = new String[] {"123"};
+
+        Runtime runTime  = Runtime.getRuntime();
+        runTime.exec("java target/classes/SoundPlayer.class Correct");
 
         BufferedReader reader = new BufferedReader(new FileReader("./data/log.txt"));
         int lines = 0;

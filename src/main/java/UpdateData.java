@@ -1,12 +1,11 @@
-package tools;
+import org.json.simple.JSONObject;
 
-import java.lang.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-import java.util.logging.*;
-
-import org.json.simple.JSONObject;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class UpdateData {
 
@@ -36,11 +35,13 @@ public class UpdateData {
             case "config":
                 logger.config(contense);
                 break;
+            case "warning":
+                logger.warning(contense);
+                break;
             case "severe":
                 logger.severe(contense);
                 break;
         }
-        System.out.println("Done!");
         fh.close(); // Do this so there is not a max lock (100) error
     }
 
