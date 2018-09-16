@@ -63,3 +63,7 @@ tar xzvf apache-maven-3.5.4-bin.tar.gz
 cd apache-maven-3.5.4-bin
 setx path "%path%;./bin"
 ```
+# Trouble Shooting:
+    When running the install, it could raise some errors. One of these is a error while building. It complains about not           finding a library, or having it discontinued. This could be because you JAVA_HOME env variable is not set to 1.8. To fix       this, set your JAVA_HOME to the 1.8 Java Virtual Machine.
+    
+    If you run into other problems, feel free to contact me.
