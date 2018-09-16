@@ -40,4 +40,4 @@ mvn compile
 printf "[${BLUE}INFO${NC}] Packing project...\n"
 mvn package
 
-printf "\n\n[${BLUE}INFO${NC}] Done! All the dependensies are now installed. You may run the file './target/classes/Core.class'.\n\n       Remember that you have to run from the JOE directory.\n\n"
+printf "\n\n[${BLUE}INFO${NC}] Done! All the dependencies are now installed. You may run the file './target/classes/Core.class'.\n\n       Remember that you have to run from the JOE directory.\n\n"
