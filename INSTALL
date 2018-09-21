@@ -39,7 +39,7 @@ brew install maven
 
 For Ubuntu:
 
-sudp apt-get update
+sudo apt-get update
 sudo apt-get install maven
 
 For Windows (install maven first: https://bit.ly/2MmJLcE):

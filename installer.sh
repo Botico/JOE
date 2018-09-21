@@ -35,6 +35,14 @@ elif ! [ -x "$(command -v mvn)" ]; then
     exit 2
 fi
 
+printf "[${BLUE}INFO${NC}] Updating CLASSPATH...\n"
+export CLASSPATH=${CLASSPATH}:.
+export CLASSPATH=${CLASSPATH}:./
+
+printf "[${BLUE}INFO${NC}] Cleaning...\n"
+mvn clean
+printf "[${BLUE}INFO${NC}] Clean Installing...\n"
+mvn clean install
 printf "[${BLUE}INFO${NC}] Compiling project...\n"
 mvn compile
 printf "[${BLUE}INFO${NC}] Packing project...\n"

@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Core extends Thread implements Runnable{
+class Core extends Thread implements Runnable {
 
     private static String userInput() {
         // This is the user input method that gets user input
@@ -76,9 +76,6 @@ public class Core extends Thread implements Runnable{
     public static void main(String[] args) throws IOException, ParseException {
         // This is the main method that handles calling functions based on user input
         String[] arguments = new String[] {"123"};
-
-        Runtime runTime  = Runtime.getRuntime();
-        runTime.exec("java target/classes/SoundPlayer.class Correct");
 
         BufferedReader reader = new BufferedReader(new FileReader("./data/log.txt"));
         int lines = 0;

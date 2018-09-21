@@ -7,7 +7,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class UpdateData {
+class UpdateData {
 
     private static void log(String contense, String loggingClass) throws IOException {
         // Logger function. This use to be returnLogObject, but it wrote XML data.
@@ -50,6 +50,7 @@ public class UpdateData {
         UpdateData.DataUpdateTiming();
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     private static void DataUpdateTiming() throws InterruptedException, IOException {
         while (true) {
             Thread.sleep(1000);
