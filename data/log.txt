@@ -1,6 +1,1 @@
-Sep 15, 2018 4:38:30 PM SoundHandler log
-INFO: foo
-Sep 15, 2018 4:38:30 PM SoundHandler log
-INFO: boo
-Sep 15, 2018 4:38:30 PM SoundHandler log
-INFO: goo
+
